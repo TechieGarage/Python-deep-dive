@@ -1,0 +1,153 @@
+=> python ternary operator:
+
+    Eg: result = X if (condition is true) else Y
+
+=> We can give type to variable as annotation (this will not actually restrict the type)
+    
+    Eg: def fun(a: int, b: int):
+            return a * b
+
+=>  Eg-1: Works fine
+        def fun1():
+            fun2()
+
+        def fun2():
+            print('hello world')
+
+        fun1()
+
+    Eg-2: Throws error
+            def fun1():
+                fun2()
+
+            fun1()
+
+            def fun2():
+                print('hello world')
+
+=> Lambda function:
+
+    Eg: fn1 = lambda x: x**2
+        fn(2)
+
+=> Implementing `do while` loop:
+
+    Eg:
+        i = 5
+        while True:
+            print(i)
+
+            if i >= 5:
+                break
+
+=> while loop with else clause: `else` statement is executed when while loop terminates normally without encountering a break statement.
+
+    Eg:
+        l = [1, 2, 3 , 4]
+        val = 10
+        idx = 0
+
+        while idx < len(l):
+            if l[idx] == val:
+                break
+            idx += 1
+        else:
+            l.append(val)
+
+        print(l)
+
+=> Inside a wile loop if we are using `try-except-finally`, finally block will always execute even if the loop encounters a break or continue statement
+
+=> Iterable: In python, an iterable is an object capable of returning values one at a time.
+    Eg: list, string, tuple etc
+
+=> For loop: In python, for loop allows to iterate over the iterable
+
+    Eg-1:
+        for i in range(5):
+            print(i)
+
+    Eg-2:
+        for x in [(1, 2), (3, 4), (5, 6)]:
+            print(x)
+
+    Eg-3:
+        for i, j in [(1, 2), (3, 4), (5, 6)]:
+            print(i, j)
+
+=> Getting index and value together from an iterable [Note: applicable to only iterables which are having index unlike set, dictionary]
+
+    s = 'hello'
+    for i, c in enumerate(s):
+        print(i, c)
+
+=> hex(id(object_name)) ---> will give memory address of the object
+
+=> Classes:
+     -> Implementing __eq__() method for custom equality check of class objects
+
+     Eg:
+        class Rectangle:
+            def __init__(self, width, height):
+                self.width = width
+                self.height = height
+
+            def __eq__(self, other):
+                if isinstance(other, Rectangle):
+                    return self.width == other.width and self.height == other.height
+                else:
+                    return False
+
+            def __lt__(self, other):
+                if isinstance(other, Rectangle):
+                    return self.area() < other.area()
+                else:
+                    return NotImplemented
+
+
+        r1 = Rectangle(10, 5)
+        r2 = Rectangle(10, 5)
+        print(r1 == r2)  # True
+        print(r1 == 100) # False
+
+        print(r1 < r2)
+        print(r1 > r2) # will look for `__gt__()` and if not found, will use `__lt__()` if defined.
+
+Note: `__repr__(self)` is specific to python shell.
+
+=> Setter and getter in python:
+
+    Eg:
+        class Rectangle:
+            def __init__(self, width, height):
+                self.width = width    # ----> setter is being used implicitly
+                self.height = height  # ----> setter is being used implicitly  
+
+            @property
+            def width(self):
+                return self._width 
+
+            @width.setter
+            def width(self, width):
+                if width <= 0:
+                    raise ValueError('Width must be positive')
+                else:
+                    self._width = width
+
+            @property
+            def height(self):
+                return self._height
+
+            @height.setter
+            def height(self, height):
+                if height <= 0:
+                    raise ValueError('height must be positive')
+                else:
+                    self._height = height
+
+        r1 = Rectangle(10, 15)
+        print(r1.width) # 10
+
+
+
+
